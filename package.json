@@ -1,0 +1,24 @@
+{
+  "name": "boiler-plate",
+  "version": "1.0.0",
+  "description": "learn nodejs and react - basic",
+  "main": "index.js",
+  "scripts": {
+    "start":"node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pjaeyoung/boiler-plate.git"
+  },
+  "keywords": [],
+  "author": "pjaeyoung",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pjaeyoung/boiler-plate/issues"
+  },
+  "homepage": "https://github.com/pjaeyoung/boiler-plate#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
