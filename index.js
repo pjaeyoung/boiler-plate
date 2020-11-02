@@ -1,21 +1,18 @@
-require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const { User } = require('./models/User');
+const config = require('./config/key');
 
 const app = express();
 const port = 3000;
 
 mongoose
-	.connect(
-		`mongodb+srv://${process.env.MONGOOSE_NICKNAME}:${process.env.MONGOOSE_PASSWORD}@boilerplate.a9smj.mongodb.net/<dbname>?retryWrites=true&w=majority`,
-		{
-			useNewUrlParser: true,
-			useUnifiedTopology: true,
-			useCreateIndex: true,
-			useFindAndModify: false,
-		}
-	)
+	.connect(config.mongoURI, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+		useCreateIndex: true,
+		useFindAndModify: false,
+	})
 	.then(() => console.log('MongoDB connected'))
 	.catch((err) => console.log(err));
 
