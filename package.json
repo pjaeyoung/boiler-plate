@@ -4,7 +4,7 @@
   "description": "learn nodejs and react - basic",
   "main": "index.js",
   "scripts": {
-    "start":"node index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +19,11 @@
   },
   "homepage": "https://github.com/pjaeyoung/boiler-plate#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.10.11"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "prettier": "^2.1.2"
   }
 }
