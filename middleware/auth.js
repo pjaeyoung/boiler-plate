@@ -4,6 +4,10 @@ const auth = (req, res, next) => {
 	// 인증처리
 	// 클라이언트 쿠키에서 토큰 가져오기
 	const token = req.cookies['x_auth'];
+
+	if (!token) {
+		return res.json({ isAuth: false, message: '토큰이 존재하지 않습니다.' });
+	}
 	// 토큰 복호화 한 후 유저 찾기
 	User.findByToken(token)
 		.then((user) => {
