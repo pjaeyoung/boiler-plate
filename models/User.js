@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const saltRounds = 10; // salt 자리수
+
 const userSchema = mongoose.Schema({
 	name: {
 		type: String,
@@ -28,6 +31,26 @@ const userSchema = mongoose.Schema({
 	tokenExp: {
 		type: Number,
 	},
+});
+
+userSchema.pre('save', function (next) {
+	const user = this;
+	// 비밀번호 암호화
+
+	if (!user.isModified('password')) return;
+
+	bcrypt
+		.genSalt(saltRounds)
+		.then((salt) => {
+			return bcrypt.hash(user.password, salt);
+		})
+		.then((hash) => {
+			user.password = hash;
+			next();
+		})
+		.catch((err) => {
+			next(err);
+		});
 });
 
 const User = mongoose.model('User', userSchema);
