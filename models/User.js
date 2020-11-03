@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
 const saltRounds = 10; // salt 자리수
 
 const userSchema = mongoose.Schema({
@@ -52,6 +54,20 @@ userSchema.pre('save', function (next) {
 			next(err);
 		});
 });
+
+userSchema.methods.comparePassword = function (plainPassword) {
+	const user = this;
+	return bcrypt
+		.compare(plainPassword, user.password)
+		.then((isMatched) => ({ isMatched, user }));
+};
+
+userSchema.methods.generateToken = function () {
+	const user = this;
+	const token = jwt.sign(`${user._id}`, 'secretToken');
+	user.token = token;
+	return user.save();
+};
 
 const User = mongoose.model('User', userSchema);
 
