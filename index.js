@@ -75,4 +75,15 @@ app.get('/api/users/auth', auth, (req, res) => {
 	});
 });
 
+app.get('/api/users/logout', auth, (req, res) => {
+	const { _id } = req.user;
+	User.findOneAndUpdate({ _id }, { token: '' })
+		.then(() => {
+			res.status(200).json({ success: true });
+		})
+		.catch(({ message }) => {
+			res.json({ success: false, message });
+		});
+});
+
 app.listen(port, () => console.log(`Example app listening on port ${port}`));
