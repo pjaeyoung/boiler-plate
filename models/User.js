@@ -37,7 +37,7 @@ userSchema.pre('save', function (next) {
 	const user = this;
 	// 비밀번호 암호화
 
-	if (!user.isModified('password')) return;
+	if (!user.isModified('password')) return next();
 
 	bcrypt
 		.genSalt(saltRounds)
